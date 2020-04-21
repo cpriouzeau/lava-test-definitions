@@ -2,6 +2,8 @@
 which lava-test-case > /dev/null 2>&1
 lava_test_case="$?"
 
+dmesg -C
+dmesg -n 3
 cd ./tpm2-tools/test/system
 ./test.sh -p | tr -d '-' | tr -d '\\' | tr -d '|' | tr -d '/' | sed -e "s|\[0m||g" -e "s|\[1;33m||g" -e "s|\[1;32m||g" -e "s|\[1;31m||g" | tee tpm2-tools.log
 
@@ -17,3 +19,5 @@ while read -r line; do
 	fi
 done < tpm2-tools.log
 
+dmesg -n 7
+dmesg
